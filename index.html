@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🌟 英文現在簡單式互動冒險島 (Present Simple Quest)</title>
+  <link rel="stylesheet" href="./present-simple.css" />
+</head>
+<body>
+
+  <!-- 彩花畫布 -->
+  <canvas id="confettiCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999;"></canvas>
+
+  <!-- 頂部導覽列 -->
+  <header class="navbar no-print">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <span>🌟 英文冒險島</span>
+        <span class="brand-badge">現在簡單式 Present Simple</span>
+      </a>
+
+      <!-- 標籤切換按鈕 -->
+      <nav class="nav-tabs">
+        <button class="tab-btn active" data-tab="tab-concept">📖 觀念實驗室</button>
+        <button class="tab-btn" data-tab="tab-transformer">⚙️ 三單變形機</button>
+        <button class="tab-btn" data-tab="tab-monster">👾 S怪獸大反擊</button>
+        <button class="tab-btn" data-tab="tab-games">🎮 遊戲挑戰區</button>
+        <button class="tab-btn" data-tab="tab-cheatsheet">📜 秘笈與學習單</button>
+      </nav>
+
+      <!-- 輔助工具 -->
+      <div class="nav-tools">
+        <button id="btnVoiceSpeed" class="tool-btn" title="切換英語朗讀語速">🐰 正常語速 (1.0x)</button>
+        <button id="btnSoundToggle" class="tool-btn" title="開關互動音效">🔊 音效：開</button>
+        <button id="btnBadges" class="tool-btn" title="查看獲得的成就勳章">🏆 我的勳章</button>
+        <a href="index.html" class="tool-btn" title="重新開始 / 回頂端">🔄 重置</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- ============================================================== -->
+    <!-- 單元一：觀念實驗室 (Concept Lab)                                -->
+    <!-- ============================================================== -->
+    <section id="tab-concept" class="tab-content active">
+      <div class="section-hero">
+        <h1>什麼是「現在簡單式」？（Present Simple Tense）</h1>
+        <p>英文裡的現在簡單式，不是指「現在正在做」，而是用來訴說<strong>「日常習慣」</strong>、<strong>「自然真理」</strong>與<strong>「喜好不變的狀態」</strong>！</p>
+      </div>
+
+      <!-- 三大使用時機卡片 -->
+      <div class="grid-3">
+        <!-- 情境 1 -->
+        <div class="context-card blue">
+          <div class="context-icon">⏰</div>
+          <h3>日常習慣與作息 <span class="badge badge-blue">Habits & Routines</span></h3>
+          <p class="desc">每天做、經常做、規律發生的生活點滴與嗜好。</p>
+          <div class="example-box">
+            <div>
+              <div class="en">I brush my teeth every day.</div>
+              <span class="zh">我每天刷牙。</span>
+            </div>
+            <button class="voice-btn" data-speech="I brush my teeth every day.">🔊</button>
+          </div>
+          <div class="example-box">
+            <div>
+              <div class="en">He plays tennis on Saturdays.</div>
+              <span class="zh">他每週六打網球。</span>
+            </div>
+            <button class="voice-btn" data-speech="He plays tennis on Saturdays.">🔊</button>
+          </div>
+        </div>
+
+        <!-- 情境 2 -->
+        <div class="context-card green">
+          <div class="context-icon">🌍</div>
+          <h3>客觀事實與科學真理 <span class="badge badge-green">Facts & Truths</span></h3>
+          <p class="desc">大自然的定律、不變的科學現象或普遍真理事實。</p>
+          <div class="example-box">
+            <div>
+              <div class="en">The sun rises in the east.</div>
+              <span class="zh">太陽從東邊升起。</span>
+            </div>
+            <button class="voice-btn" data-speech="The sun rises in the east.">🔊</button>
+          </div>
+          <div class="example-box">
+            <div>
+              <div class="en">Water boils at 100°C.</div>
+              <span class="zh">水在攝氏100度沸騰。</span>
+            </div>
+            <button class="voice-btn" data-speech="Water boils at 100 degrees Celsius.">🔊</button>
+          </div>
+        </div>
+
+        <!-- 情境 3 -->
+        <div class="context-card pink">
+          <div class="context-icon">💖</div>
+          <h3>喜好、感受與狀態 <span class="badge badge-pink">Likes & States</span></h3>
+          <p class="desc">你喜歡什麼、你的身份、或者長期的固定狀態。</p>
+          <div class="example-box">
+            <div>
+              <div class="en">Cats love sleeping in boxes.</div>
+              <span class="zh">貓咪超愛睡在紙箱裡。</span>
+            </div>
+            <button class="voice-btn" data-speech="Cats love sleeping in boxes.">🔊</button>
+          </div>
+          <div class="example-box">
+            <div>
+              <div class="en">She has two cute puppies.</div>
+              <span class="zh">她養了兩隻可愛的小狗。</span>
+            </div>
+            <button class="voice-btn" data-speech="She has two cute puppies.">🔊</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 頻率副詞常客表 -->
+      <div class="glass-card">
+        <h2 style="display:flex; align-items:center; gap:8px;">🚦 常常一起出現的好朋友：頻率副詞 (Adverbs of Frequency)</h2>
+        <p style="color:var(--text-muted); margin-bottom:16px;">當你想表達事情發生的「頻率高低」時，把它們放在<strong>一般動詞前面、be 動詞後面</strong>：</p>
+        <div class="grid-2">
+          <div style="background:#f8fafc; border-radius:8px; padding:12px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <strong>Always（總是 100%）</strong>
+              <button class="voice-btn" data-speech="I always eat breakfast.">🔊</button>
+            </div>
+            <span style="font-size:0.9rem; color:#475569;">例：I <strong>always</strong> eat breakfast.（我總是吃早餐。）</span>
+          </div>
+          <div style="background:#f8fafc; border-radius:8px; padding:12px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <strong>Usually（通常 80%）</strong>
+              <button class="voice-btn" data-speech="She usually reads books.">🔊</button>
+            </div>
+            <span style="font-size:0.9rem; color:#475569;">例：She <strong>usually</strong> reads books.（她通常會閱讀。）</span>
+          </div>
+          <div style="background:#f8fafc; border-radius:8px; padding:12px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <strong>Sometimes（有時 50%）</strong>
+              <button class="voice-btn" data-speech="We sometimes go to the park.">🔊</button>
+            </div>
+            <span style="font-size:0.9rem; color:#475569;">例：We <strong>sometimes</strong> go to the park.（我們有時去公園。）</span>
+          </div>
+          <div style="background:#f8fafc; border-radius:8px; padding:12px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <strong>Never（從不 0%）</strong>
+              <button class="voice-btn" data-speech="He never drinks coffee.">🔊</button>
+            </div>
+            <span style="font-size:0.9rem; color:#475569;">例：He <strong>never</strong> drinks coffee.（他從不喝咖啡。）</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 判斷快問快答 Widget -->
+      <div class="quiz-widget">
+        <div class="quiz-header">
+          <h3 style="display:flex; align-items:center; gap:8px;">💡 觀念即時考驗：這句話該用「現在簡單式」嗎？</h3>
+          <span class="badge badge-purple">互動測驗</span>
+        </div>
+        <div class="quiz-question-box">
+          <div id="conceptQText" class="q-text">載入中...</div>
+          <div id="conceptQSub" class="q-sub">說明載入中</div>
+        </div>
+        <div class="quiz-actions">
+          <button id="btnConceptYes" class="btn-choice yes">⭕ 是！用現在簡單式</button>
+          <button id="btnConceptNo" class="btn-choice no">❌ 否！這不是簡單式</button>
+        </div>
+        <div id="conceptFeedback" class="quiz-feedback"></div>
+        <div style="text-align:center; margin-top:14px;">
+          <button id="btnConceptNext" class="btn-magic" style="display:none; padding:8px 20px;">下一題 ➡️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 單元二：三單變形實驗室 (The 3rd-Person Singular Machine)        -->
+    <!-- ============================================================== -->
+    <section id="tab-transformer" class="tab-content">
+      <div class="section-hero">
+        <h1>第三人稱單數動詞變形（3rd Person Singular Verb Rules）</h1>
+        <p>當主詞是 <strong>He（他）、She（她）、It（它）</strong> 或 <strong>單數名詞</strong> 時，動詞屁股要變身！讓我們用機器來瞧瞧變形規律！</p>
+      </div>
+
+      <!-- 互動變形機器 (The Machine) -->
+      <div class="transformer-machine">
+        <div class="machine-header">
+          <div class="machine-title">
+            <span>⚙️ 魔法動詞變形機 (Verb Transformer 3000)</span>
+          </div>
+          <span style="font-size:0.85rem; color:#cbd5e1;">只要輸入動詞原型，自動分析變形規則！</span>
+        </div>
+
+        <div class="machine-screen">
+          <div class="verb-slot">
+            <div class="label">原形動詞 (Base Verb)</div>
+            <div id="boxBaseVerb" class="box">watch</div>
+          </div>
+          <div class="transform-arrow">➔ ⚡ ➔</div>
+          <div class="verb-slot">
+            <div class="label">第三人稱單數 (3rd Person Verb)</div>
+            <div id="boxResultVerb" class="box" style="color:#ec4899; border-color:#db2777;">watches</div>
+          </div>
+        </div>
+
+        <div class="machine-controls">
+          <div class="custom-input-group">
+            <input type="text" id="transformerInput" placeholder="輸入你想測試的英文動詞（例如：study, play, fix, fly...）" value="watch" />
+            <button id="btnRunTransformer" class="btn-magic">⚡ 啟動變形機器</button>
+          </div>
+
+          <div>
+            <span style="font-size:0.85rem; color:#94a3b8; display:block; margin-bottom:8px;">或快速點選熱門動詞：</span>
+            <div class="preset-verbs">
+              <button class="preset-btn" data-verb="watch">watch（看）</button>
+              <button class="preset-btn" data-verb="study">study（讀書）</button>
+              <button class="preset-btn" data-verb="play">play（玩）</button>
+              <button class="preset-btn" data-verb="fix">fix（修理）</button>
+              <button class="preset-btn" data-verb="wash">wash（洗）</button>
+              <button class="preset-btn" data-verb="fly">fly（飛）</button>
+              <button class="preset-btn" data-verb="go">go（去）</button>
+              <button class="preset-btn" data-verb="have">have（擁有）</button>
+              <button class="preset-btn" data-verb="teach">teach（教導）</button>
+              <button class="preset-btn" data-verb="buy">buy（買）</button>
+              <button class="preset-btn" data-verb="cry">cry（哭）</button>
+              <button class="preset-btn" data-verb="do">do（做）</button>
+              <button class="preset-btn" data-verb="run">run（跑）</button>
+            </div>
+          </div>
+
+          <div class="machine-explanation">
+            <div>
+              <strong>規則判斷：</strong> <span id="transformerRuleName" style="color:#38bdf8; font-weight:700;">字尾是「-ch」</span>
+            </div>
+            <div id="transformerExplanation" style="margin:4px 0;">
+              動詞字尾是 ch，為了發音流暢，後面要加上「-es」！
+            </div>
+            <div style="color:#fde047; font-weight:700;">
+              💡 記憶口訣：<span id="transformerRhyme">嘶～去吃個（s, sh, ch, x, o）火鍋加 -es！</span>
+            </div>
+            <div style="margin-top:10px; display:flex; align-items:center; gap:8px;">
+              <span><strong>實用例句：</strong> <span id="transformerSentence" style="color:#a5f3fc; font-weight:600;">He watches every day.</span></span>
+              <button id="btnSpeechTransform" class="voice-btn" data-speech="watch, watches. He watches every day.">🔊</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 四大變形法則總整理卡片 -->
+      <h2 style="margin-bottom:16px;">📚 三單變形 4 大規則秘笈卡片</h2>
+      <div class="grid-2">
+        <!-- 規則 1 -->
+        <div class="rule-card">
+          <div class="rule-number">規則 1</div>
+          <h3>一般動詞：直接加 -s</h3>
+          <div class="rhyme">口訣：最普遍，加個 s 就搞定！</div>
+          <table class="rule-examples-table">
+            <tr><td>play ➔ <strong>plays</strong> (玩)</td><td>eat ➔ <strong>eats</strong> (吃)</td></tr>
+            <tr><td>read ➔ <strong>reads</strong> (讀)</td><td>run ➔ <strong>runs</strong> (跑)</td></tr>
+            <tr><td>like ➔ <strong>likes</strong> (喜歡)</td><td>sleep ➔ <strong>sleeps</strong> (睡覺)</td></tr>
+          </table>
+        </div>
+
+        <!-- 規則 2 -->
+        <div class="rule-card">
+          <div class="rule-number">規則 2</div>
+          <h3>字尾是 s, sh, ch, x, o：加 -es</h3>
+          <div class="rhyme">口訣：嘶嘶叫的氣音與 o，加上 -es 好順口！</div>
+          <table class="rule-examples-table">
+            <tr><td>watch ➔ <strong>watches</strong> (看)</td><td>wash ➔ <strong>washes</strong> (洗)</td></tr>
+            <tr><td>pass ➔ <strong>passes</strong> (通過)</td><td>fix ➔ <strong>fixes</strong> (修理)</td></tr>
+            <tr><td>go ➔ <strong>goes</strong> (去)</td><td>do ➔ <strong>does</strong> (做)</td></tr>
+          </table>
+        </div>
+
+        <!-- 規則 3 -->
+        <div class="rule-card">
+          <div class="rule-number">規則 3</div>
+          <h3>字尾是「子音 + y」：去 y 改 -ies</h3>
+          <div class="rhyme">口訣：子音遇 y 不合群，踢掉 y 換成 -ies！</div>
+          <table class="rule-examples-table">
+            <tr><td>fly ➔ <strong>flies</strong> (飛)</td><td>study ➔ <strong>studies</strong> (研讀)</td></tr>
+            <tr><td>cry ➔ <strong>cries</strong> (哭)</td><td>carry ➔ <strong>carries</strong> (搬)</td></tr>
+            <tr><td colspan="2" style="color:#d97706; font-size:0.85rem;">⚠️ 注意：如果是「母音 (a,e,i,o,u) + y」，直接加 s 即可（例如 play ➔ plays, buy ➔ buys）！</td></tr>
+          </table>
+        </div>
+
+        <!-- 規則 4 -->
+        <div class="rule-card">
+          <div class="rule-number">規則 4</div>
+          <h3>不規則魔王：have ➔ has</h3>
+          <div class="rhyme">口訣：have 變身記，直接換成 has！</div>
+          <table class="rule-examples-table">
+            <tr><td>have ➔ <strong>has</strong> (有)</td><td>be ➔ <strong>is</strong> (是)</td></tr>
+            <tr><td colspan="2" style="font-size:0.85rem; color:#475569;">例：He <strong>has</strong> a bicycle.（他有一輛腳踏車。）</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 單元三：S 怪獸大反擊 (The S-Monster - 否定句與疑問句)             -->
+    <!-- ============================================================== -->
+    <section id="tab-monster" class="tab-content">
+      <div class="section-hero">
+        <h1>否定句與疑問句：S 怪獸大反擊！</h1>
+        <p>很多同學最容易犯的錯誤：遇到 <strong>doesn't</strong> 或 <strong>Does</strong>，動詞還要加 s 嗎？看怪獸一口吃給你看！</p>
+      </div>
+
+      <div class="monster-arena">
+        <div id="monsterCharacter" class="monster-character">👾</div>
+        <div class="monster-name">大嘴怪獸 Doesn't</div>
+        <div class="monster-quote">「嗷嗚～只要我一出現，動詞屁股的 -s 通通歸我吃！」</div>
+
+        <!-- 句型展示舞台 -->
+        <div class="sentence-stage">
+          <div id="monsterSentenceDisplay" class="sentence-display">
+            <!-- 動態注入 -->
+          </div>
+          <div id="monsterTranslation" class="sentence-translation">湯姆每天踢足球。</div>
+          <div style="display:flex; justify-content:center; gap:8px;">
+            <button id="btnSpeechMonster" class="voice-btn" data-speech="Tom plays soccer every day.">🔊 朗讀整句</button>
+            <button id="btnNextMonsterSentence" class="tool-btn">換一句練習 ➔</button>
+          </div>
+        </div>
+
+        <!-- 句型切換按鈕 -->
+        <div class="monster-switch-bar">
+          <button class="btn-mode active" data-mode="aff">1. 肯定句（Affirmative）</button>
+          <button class="btn-mode" data-mode="neg">2. 否定句（怪獸吃掉 S！）</button>
+          <button class="btn-mode" data-mode="ques">3. 疑問句（Does 拿走 S！）</button>
+        </div>
+
+        <!-- 解說方塊 -->
+        <div id="monsterExplanation" class="monster-explanation-box">
+          <strong>💡 肯定句（Affirmative）：</strong> 主詞是 Tom（第三人稱單數），怪獸在睡覺，動詞正常加上了 -s！
+        </div>
+      </div>
+
+      <!-- 快速問答短答速查表 -->
+      <div class="glass-card">
+        <h2>🗣️ 疑問句簡答公式 (Short Answers)</h2>
+        <table class="cheatsheet-table">
+          <thead>
+            <tr>
+              <th>問題 (Question)</th>
+              <th>肯定回答 (Yes)</th>
+              <th>否定回答 (No)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Do</strong> you like pizza?</td>
+              <td>Yes, I <strong>do</strong>.</td>
+              <td>No, I <strong>don't</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>Does</strong> he play tennis?</td>
+              <td>Yes, he <strong>does</strong>.</td>
+              <td>No, he <strong>doesn't</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>Do</strong> they walk to school?</td>
+              <td>Yes, they <strong>do</strong>.</td>
+              <td>No, they <strong>don't</strong>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 單元四：遊戲挑戰區 (Game Arcade)                                -->
+    <!-- ============================================================== -->
+    <section id="tab-games" class="tab-content">
+      <div class="section-hero">
+        <h1>🎮 語法遊戲競技場 (Grammar Game Arcade)</h1>
+        <p>挑選你喜愛的遊戲關卡，透過連擊、分類與拼圖，把現在簡單式深深烙印在腦海中！</p>
+      </div>
+
+      <!-- 遊戲選單 -->
+      <div class="game-selector">
+        <div class="game-card-btn active" data-game="catcher">
+          <div class="g-icon">⚡</div>
+          <div class="g-title">1. 動詞抓抓樂</div>
+          <div class="g-desc">30秒倒數！看主詞速配正確動詞</div>
+        </div>
+        <div class="game-card-btn" data-game="sorter">
+          <div class="g-icon">🧺</div>
+          <div class="g-title">2. 變形敲敲樂</div>
+          <div class="g-desc">辨別動詞該加 +s, +es 還是 +ies</div>
+        </div>
+        <div class="game-card-btn" data-game="puzzle">
+          <div class="g-icon">🧩</div>
+          <div class="g-title">3. 句子大拼圖</div>
+          <div class="g-desc">組裝零散單字，打造完美英文句</div>
+        </div>
+        <div class="game-card-btn" data-game="quiz">
+          <div class="g-icon">👑</div>
+          <div class="g-title">4. 魔法大考驗</div>
+          <div class="g-desc">3顆愛心挑戰！綜合期末證書試煉</div>
+        </div>
+      </div>
+
+      <!-- 遊戲主舞台 -->
+      <div class="game-arena">
+        
+        <!-- 遊戲 1：動詞抓抓樂 -->
+        <div id="view-catcher" class="game-view">
+          <div class="game-hud">
+            <div class="hud-item hud-time">⏳ 倒數：<span id="catcherTime">30</span> 秒</div>
+            <div class="hud-item hud-combo">🔥 連擊：<span id="catcherCombo">0</span> Combo</div>
+            <div class="hud-item hud-score">⭐ 得分：<span id="catcherScore">0</span></div>
+          </div>
+
+          <div class="catcher-container">
+            <div class="catcher-subject-box">
+              <div class="subj-label">當前主詞是：</div>
+              <div id="catcherSubjText" class="subj-text">He</div>
+              <div id="catcherSubjZh" class="subj-zh">他（第三人稱單數）</div>
+            </div>
+
+            <p style="font-weight:600; color:#64748b; margin-bottom:12px;">快速點選正確的動詞形式：</p>
+            <div class="catcher-options">
+              <button id="btnCatcherLeft" class="btn-catcher">play</button>
+              <button id="btnCatcherRight" class="btn-catcher">plays</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 遊戲 2：變形敲敲樂 -->
+        <div id="view-sorter" class="game-view" style="display:none;">
+          <div class="game-hud">
+            <div class="hud-item" style="color:#0284c7;">🎯 <span id="sorterProgress">第 1 / 14 題</span></div>
+            <div class="hud-item hud-score">⭐ 累積分數：<span id="sorterScore">0</span></div>
+          </div>
+
+          <div class="sorter-container">
+            <div class="sorter-verb-card">
+              <div id="sorterWord" class="v-word">watch</div>
+              <div id="sorterMeaning" class="v-meaning">中文意思是：「看」</div>
+            </div>
+
+            <p style="font-weight:600; color:#64748b; margin-bottom:16px;">這個動詞遇到三單時，屁股要放進哪個籃子？</p>
+            <div class="sorter-baskets">
+              <button class="basket-btn" data-type="s">
+                <span class="rule-tag">+ s</span>
+                <span class="rule-sub">一般動詞直接加 s</span>
+              </button>
+              <button class="basket-btn" data-type="es">
+                <span class="rule-tag">+ es</span>
+                <span class="rule-sub">字尾 s, sh, ch, x, o</span>
+              </button>
+              <button class="basket-btn" data-type="ies">
+                <span class="rule-tag">去 y 改 + ies</span>
+                <span class="rule-sub">字尾是子音 + y</span>
+              </button>
+              <button class="basket-btn" data-type="has">
+                <span class="rule-tag">不規則 has</span>
+                <span class="rule-sub">have 變形專屬</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 遊戲 3：句子大拼圖 -->
+        <div id="view-puzzle" class="game-view" style="display:none;">
+          <div class="game-hud">
+            <div class="hud-item" style="color:#8b5cf6;">🧩 <span id="puzzleLevelText">第 1 / 5 關</span></div>
+            <button id="btnResetPuzzle" class="tool-btn">🔄 重組本題</button>
+          </div>
+
+          <div class="puzzle-container">
+            <div style="text-align:center; margin-bottom:16px;">
+              <span style="font-size:0.9rem; color:#64748b;">目標中文意思：</span>
+              <h3 id="puzzleZh" style="color:#1e1b4b; font-size:1.3rem;">他每天早上喝牛奶。</h3>
+            </div>
+
+            <div id="puzzleTarget" class="puzzle-target">
+              <!-- 已選單字 -->
+            </div>
+
+            <div style="text-align:center; margin-bottom:8px; font-size:0.85rem; color:#64748b;">可用的單字積木（點擊加入句子，點擊上方積木可退回）：</div>
+            <div id="puzzlePool" class="puzzle-pool">
+              <!-- 備選單字按鈕 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 遊戲 4：期末大考驗 -->
+        <div id="view-quiz" class="game-view" style="display:none;">
+          <div class="game-hud">
+            <div class="hud-item" style="color:#10b981;">📜 <span id="grandQuizProgress">第 1 / 10 題</span></div>
+            <div class="hud-item" id="grandHearts" style="font-size:1.3rem;">❤️❤️❤️</div>
+          </div>
+
+          <div class="quiz-game-container">
+            <div style="background:#f8fafc; border-radius:12px; padding:20px; border-left:4px solid #4f46e5;">
+              <div id="grandQText" style="font-size:1.35rem; font-weight:800; color:#1e1b4b; margin-bottom:6px;">載入中...</div>
+              <div id="grandQZh" style="font-size:0.95rem; color:#64748b;">提示載入中...</div>
+            </div>
+
+            <div id="grandOptionsList" class="quiz-option-list">
+              <!-- 選項按鈕 -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- 單元五：秘笈與學習單 (Cheatsheet & Printable Worksheet)         -->
+    <!-- ============================================================== -->
+    <section id="tab-cheatsheet" class="tab-content">
+      <div class="cheatsheet-section">
+        <div class="print-bar no-print">
+          <div>
+            <h2>📜 現在簡單式核心速查總表 & 練習題單</h2>
+            <p style="color:#64748b; font-size:0.9rem;">可作為隨堂講義或複習考卷，支援一鍵列印成紙本！</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button id="btnToggleAnswers" class="tool-btn">👁️ 顯示參考解答</button>
+            <button id="btnPrintWorksheet" class="btn-magic" style="padding:8px 18px;">🖨️ 列印學習單 (Print)</button>
+          </div>
+        </div>
+
+        <!-- 重點總表 -->
+        <h3 style="margin-top:12px;">一、主詞與動詞搭配規則表 (Subject-Verb Agreement)</h3>
+        <table class="cheatsheet-table">
+          <thead>
+            <tr>
+              <th>主詞分類</th>
+              <th>肯定句動詞</th>
+              <th>否定句助動詞</th>
+              <th>疑問句助動詞</th>
+              <th>範例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>I / You / We / They</strong><br><small>以及複數名詞 (Boys, Dogs)</small></td>
+              <td><strong>動詞原形 (Base Verb)</strong><br>如：play, study, have</td>
+              <td><strong>don't + 動詞原形</strong></td>
+              <td><strong>Do + 主詞 + 動詞原形?</strong></td>
+              <td>They <strong>play</strong> games.<br>They <strong>don't play</strong> games.</td>
+            </tr>
+            <tr>
+              <td><strong>He / She / It</strong><br><small>以及單數名詞 (Tom, The cat)</small></td>
+              <td><strong>加 -s / -es / -ies / has</strong><br>如：plays, studies, has</td>
+              <td><strong>doesn't + 動詞原形</strong></td>
+              <td><strong>Does + 主詞 + 動詞原形?</strong></td>
+              <td>He <strong>plays</strong> games.<br>He <strong>doesn't play</strong> games.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 三單變形口訣 -->
+        <h3 style="margin-top:20px;">二、第三人稱單數動詞加 -s 四大口訣</h3>
+        <ol style="margin-left:24px; line-height:1.8; color:#334155;">
+          <li><strong>一般動詞最簡單：</strong>直接加 <code>-s</code>（e.g. read ➔ reads, like ➔ likes）。</li>
+          <li><strong>字尾嘶嘶氣音（s, sh, ch, x）或 o：</strong>加 <code>-es</code>（e.g. watch ➔ watches, wash ➔ washes, go ➔ goes）。</li>
+          <li><strong>字尾「子音 + y」：</strong>去 y 改 <code>-ies</code>（e.g. fly ➔ flies, study ➔ studies）。</li>
+          <li><strong>特殊不規則王者：</strong>have 變身為 <code>has</code>！</li>
+        </ol>
+
+        <!-- 10 題隨堂測驗練習單 -->
+        <h3 style="margin-top:24px;">三、實戰挑戰 10 題（請選出正確的答案）</h3>
+        <div style="margin-top:12px;">
+          
+          <div class="worksheet-item">
+            <div>1. My father ________ a newspaper every morning. (A) read (B) reads (C) reading (D) is read</div>
+            <div class="worksheet-ans">【參考答案】：(B) reads。主詞 My father 是單數 He，一般動詞加 -s。</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>2. Monkeys ________ bananas very much. (A) likes (B) like (C) liking (D) is like</div>
+            <div class="worksheet-ans">【參考答案】：(B) like。主詞 Monkeys 是複數（They），動詞用原形。</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>3. Lily ________ her teeth before going to bed. (A) brush (B) brushs (C) brushes (D) brushing</div>
+            <div class="worksheet-ans">【參考答案】：(C) brushes。brush 字尾是 sh，加 -es。</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>4. He ________ not like cold water. (A) do (B) does (C) is (D) are</div>
+            <div class="worksheet-ans">【參考答案】：(B) does。主詞 He 的否定助動詞用 does not (doesn't)。</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>5. ________ your brother go to school by bus? (A) Is (B) Do (C) Does (D) Are</div>
+            <div class="worksheet-ans">【參考答案】：(C) Does。主詞 your brother 是第三人稱單數，一般動詞問句用 Does 開頭。</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>6. Does she ________ to music in the afternoon? (A) listen (B) listens (C) listening (D) listened</div>
+            <div class="worksheet-ans">【參考答案】：(A) listen。句首已有助動詞 Does，後方動詞打回原形！</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>7. A pilot ________ an airplane in the sky. (A) fly (B) flys (C) flies (D) flying</div>
+            <div class="worksheet-ans">【參考答案】：(C) flies。fly 是子音 + y，去 y 改 -ies。</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>8. I ________ two pet rabbits at home. (A) has (B) have (C) haves (D) having</div>
+            <div class="worksheet-ans">【參考答案】：(B) have。第一人稱 I 搭配原形動詞 have。</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>9. The Earth ________ around the Sun. (A) goes (B) go (C) going (D) went</div>
+            <div class="worksheet-ans">【參考答案】：(A) goes。客觀科學真理，主詞 The Earth 為單數 It，go 加 -es 變成 goes。</div>
+          </div>
+
+          <div class="worksheet-item">
+            <div>10. They don't ________ fast food on weekdays. (A) eats (B) eating (C) eat (D) ate</div>
+            <div class="worksheet-ans">【參考答案】：(C) eat。助動詞 don't 後面接動詞原形。</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 遊戲結算彈窗 -->
+  <div id="gameResultModal" class="game-result-modal">
+    <div class="result-card">
+      <div id="resultStars" class="result-stars">⭐⭐⭐</div>
+      <div id="resultTitle" class="result-title">挑戰完成！</div>
+      <div class="result-score-circle">
+        <span id="resultScore">100</span>
+        <span>PTS</span>
+      </div>
+      <p id="resultDesc" style="color:#64748b; margin-bottom:20px;">太厲害了！你已經掌握了現在簡單式的核心奧秘！</p>
+      <button id="btnCloseResultModal" class="btn-magic" style="padding:10px 24px; width:100%;">收下榮耀 🚀</button>
+    </div>
+  </div>
+
+  <!-- 成就徽章彈窗 -->
+  <div id="badgeModal" class="game-result-modal">
+    <div class="result-card" style="max-width:560px;">
+      <h2 style="color:#1e1b4b; margin-bottom:6px;">🏆 我的學習榮譽徽章</h2>
+      <p style="color:#64748b; font-size:0.9rem;">完成各種互動挑戰、變形與遊戲，解鎖所有成就吧！</p>
+      <div id="badgeGrid" class="badge-grid">
+        <!-- 動態注入徽章 -->
+      </div>
+      <button id="closeBadgeModal" class="btn-magic" style="margin-top:20px; padding:8px 24px;">太棒了！</button>
+    </div>
+  </div>
+
+  <script src="./present-simple.js"></script>
+</body>
+</html>
